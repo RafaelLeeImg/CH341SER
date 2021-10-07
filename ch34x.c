@@ -125,7 +125,7 @@ static DECLARE_WAIT_QUEUE_HEAD(wq);
 static int wait_flag = 0;
 
 struct ch34x_buf {
-	unsigned int buf_size;
+	int buf_size;
 	char *buf_buf;
 	char *buf_get;
 	char *buf_put;
@@ -164,11 +164,11 @@ static struct usb_driver ch34x_driver = {
 
 // ch34x_buf_alloc
 // Allocate a circular buffer and all associated memory
-static struct ch34x_buf *ch34x_buf_alloc( unsigned int size )
+static struct ch34x_buf *ch34x_buf_alloc( int size )
 {
 	struct ch34x_buf *pb;
 
-	if( size == 0 )
+	if( size <= 0 )
 		return NULL;
 
 	pb = kmalloc( sizeof(struct ch34x_buf), GFP_KERNEL );
@@ -211,7 +211,7 @@ static void ch34x_buf_clear( struct ch34x_buf *pb )
 
 // ch34x_buf_data_avail
 // Return the number of bytes of data available in he circular buffer
-static unsigned int ch34x_buf_data_avail( struct ch34x_buf *pb )
+static int ch34x_buf_data_avail( struct ch34x_buf *pb )
 {
 	if( pb == NULL )
 		return 0;

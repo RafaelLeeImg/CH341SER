@@ -1359,3 +1359,8 @@ static void __exit ch34x_exit(void)
 
 module_init( ch34x_init );
 module_exit( ch34x_exit );
+
+// dmesg 5.18.0-4-amd64
+// [xxxx.xxxxxx] ch34x: Unknown symbol usb_serial_port_softint (err -2)
+// [xxxx.xxxxxx] ch34x: Unknown symbol usb_serial_deregister_drivers (err -2)
+// [xxxx.xxxxxx] ch34x: Unknown symbol usb_serial_register_drivers (err -2)

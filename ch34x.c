@@ -938,7 +938,7 @@ static int ch34x_write_room( struct tty_struct *tty )
 {
 	struct usb_serial_port *port = tty->driver_data;
 #else
-static int ch34x_write_room( struct usb_serial_port *port )
+static unsigned int ch34x_write_room( struct usb_serial_port *port )
 {
 #endif
 	struct ch34x_private *priv = usb_get_serial_port_data( port );
@@ -968,7 +968,7 @@ static int ch34x_chars_in_buffer( struct tty_struct *tty )
 {
 	struct usb_serial_port *port = tty->driver_data;
 #else
-static int ch34x_chars_in_buffer( struct usb_serial_port *port )
+static unsigned int ch34x_chars_in_buffer( struct usb_serial_port *port )
 {
 #endif
 	struct ch34x_private *priv = usb_get_serial_port_data(port);
@@ -1359,3 +1359,8 @@ static void __exit ch34x_exit(void)
 
 module_init( ch34x_init );
 module_exit( ch34x_exit );
+
+// dmesg 5.18.0-4-amd64
+// [11111.123456] ch34x: Unknown symbol usb_serial_port_softint (err -2)
+// [11111.123456] ch34x: Unknown symbol usb_serial_deregister_drivers (err -2)
+// [11111.123456] ch34x: Unknown symbol usb_serial_register_drivers (err -2)
